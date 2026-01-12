@@ -1,0 +1,11 @@
+/* Import Tailwind's base styles, components, and utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Set global background and text color from your palette */
+body {
+  font-family: 'Inter', sans-serif; /* A clean, modern font */
+  background-color: theme('colors.legal-gray.bg');
+  color: theme('colors.legal-text.primary');
+}

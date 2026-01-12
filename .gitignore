@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+*.egg-info/
+
+# Project data & secrets
+data/
+backend/app/data/
+backend/app/static/outputs/
+database/seed_data/
+database/backups/
+*.db
+*.sqlite*
+*.log
+*.bak
+.env.*
+frontend/.env*
+backend/.env*
+
+# Node
+node_modules/
+.npm/
+dist/
+dist-ssr/
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
