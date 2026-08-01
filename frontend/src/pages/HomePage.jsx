@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  MessageCircle, 
-  FileText, 
-  Library, 
-  FileSearch, 
-  FileUp, 
-  Edit, 
-  BookOpen, 
-  ListChecks, 
-  Shield,
-  Award
+import {
+  MessageCircle,
+  FileText,
+  Library,
+  FileSearch,
+  FileUp,
+  Edit,
+  BookOpen,
+  ListChecks
 } from 'lucide-react';
 // Make sure this path is correct for your folder structure
 import logo from '../assets/logo.png'; 
@@ -146,79 +144,10 @@ function HomePage() {
                 title="FAQ Builder"
                 description="Instantly generate a list of common client questions and answers for any legal topic."
               />
-              <FeatureCard 
-                icon={Shield}
-                title="Secure & Private"
-                description="Your data is your own. We prioritize security and confidentiality for all your work."
-              />
             </div>
           </div>
         </div>
-
-        {/* 4. Trust Section */}
-        <div className="py-24" style={{ backgroundColor: softGray }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-extrabold text-gray-800">
-                Why Choose KanoonAI?
-              </h2>
-              <p className="mt-4 text-lg text-gray-600">
-                We're built for excellence, efficiency, and your peace of mind.
-              </p>
-            </div>
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div 
-                className="flex items-start p-6 bg-white rounded-lg shadow-lg border border-gray-200 
-                           transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-              >
-                <div className="flex items-center justify-center h-10 w-10 rounded-full mr-4" style={{ backgroundColor: goldAccent }}>
-                  <Award className="h-5 w-5" style={{ color: deepBlue }} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Unmatched Accuracy</h3>
-                  <p className="text-gray-600 text-sm">Provides highly accurate legal reasoning and explanations.</p>
-                </div>
-              </div>
-              <div 
-                className="flex items-start p-6 bg-white rounded-lg shadow-lg border border-gray-200 
-                           transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-              >
-                <div className="flex items-center justify-center h-10 w-10 rounded-full mr-4" style={{ backgroundColor: goldAccent }}>
-                  <Award className="h-5 w-5" style={{ color: deepBlue }} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Clarity & Simplicity</h3>
-                  <p className="text-gray-600 text-sm">Delivers complex legal information in simple, easy-to-understand language.</p>
-                </div>
-              </div>
-              <div 
-                className="flex items-start p-6 bg-white rounded-lg shadow-lg border border-gray-200 
-                           transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-              >
-                <div className="flex items-center justify-center h-10 w-10 rounded-full mr-4" style={{ backgroundColor: goldAccent }}>
-                  <Award className="h-5 w-5" style={{ color: deepBlue }} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Lightning Fast</h3>
-                  <p className="text-gray-600 text-sm">Get instant answers and results in seconds, not hours or days.</p>
-                </div>
-              </div>
-              <div 
-                className="flex items-start p-6 bg-white rounded-lg shadow-lg border border-gray-200 
-                           transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-              >
-                <div className="flex items-center justify-center h-10 w-10 rounded-full mr-4" style={{ backgroundColor: goldAccent }}>
-                  <Award className="h-5 w-5" style={{ color: deepBlue }} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Designed for India</h3>
-                  <p className="text-gray-600 text-sm">Specifically tailored and trained on the nuances of Indian legal frameworks.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        
       </main>
 
       {/* 5. Footer */}

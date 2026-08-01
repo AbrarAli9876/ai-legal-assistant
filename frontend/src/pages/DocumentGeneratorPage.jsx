@@ -47,7 +47,7 @@ const NdaForm = ({ states }) => {
         <legend className="text-lg font-semibold text-legal-blue-primary">1. Document Details</legend>
         <FormInput label="Purpose of Disclosure" id="purpose" value={states.purpose} onChange={(e) => states.setPurpose(e.target.value)} placeholder="e.g., 'Evaluating a potential business collaboration'" />
         <FormInput label="Business Purpose" id="businessPurpose" value={states.businessPurpose} onChange={(e) => states.setBusinessPurpose(e.target.value)} placeholder="e.g., 'Software development partnership'" />
-        <FormInput label="Duration (in years)" id="duration" value={states.duration} onChange={(e) => states.setDuration(e.target.value)} placeholder="e.g., '5'" type="number" />
+        <FormInput label="Duration (in years)" id="duration" value={states.duration} onChange={(e) => states.setDuration(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '5'" type="text" />
         <FormInput label="Jurisdiction (City)" id="jurisdiction" value={states.jurisdiction} onChange={(e) => states.setJurisdiction(e.target.value)} placeholder="e.g., 'Mumbai'" />
       </fieldset>
       
@@ -120,7 +120,7 @@ const RentAgreementForm = ({ states }) => {
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">1. Landlord Details</legend>
         <FormInput label="Landlord Full Name" id="landlordName" value={states.landlordName} onChange={(e) => states.setLandlordName(e.target.value)} placeholder="e.g., 'Mr. Suresh Gupta'" />
-        <FormInput label="Landlord Age" id="landlordAge" value={states.landlordAge} onChange={(e) => states.setLandlordAge(e.target.value)} type="number" />
+        <FormInput label="Landlord Age" id="landlordAge" value={states.landlordAge} onChange={(e) => states.setLandlordAge(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '55'" type="text" />
         <FormInput label="Landlord S/o, D/o, W/o" id="landlordRelation" value={states.landlordRelation} onChange={(e) => states.setLandlordRelation(e.target.value)} placeholder="e.g., 'Late Mr. Ramesh Gupta'" />
         <FormInput label="Landlord Address" id="landlordAddress" value={states.landlordAddress} onChange={(e) => states.setLandlordAddress(e.target.value)} placeholder="e.g., '101, Marine Drive, Mumbai'" />
         <FormInput label="Landlord Phone" id="landlordPhone" value={states.landlordPhone} onChange={(e) => states.setLandlordPhone(e.target.value)} placeholder="e.g., '98XXXXXX01'" />
@@ -128,7 +128,7 @@ const RentAgreementForm = ({ states }) => {
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">2. Tenant Details</legend>
         <FormInput label="Tenant Full Name" id="tenantName" value={states.tenantName} onChange={(e) => states.setTenantName(e.target.value)} placeholder="e.g., 'Ms. Priya Sharma'" />
-        <FormInput label="Tenant Age" id="tenantAge" value={states.tenantAge} onChange={(e) => states.setTenantAge(e.target.value)} type="number" />
+        <FormInput label="Tenant Age" id="tenantAge" value={states.tenantAge} onChange={(e) => states.setTenantAge(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '28'" type="text" />
         <FormInput label="Tenant S/o, D/o, W/o" id="tenantRelation" value={states.tenantRelation} onChange={(e) => states.setTenantRelation(e.target.value)} placeholder="e.g., 'Mr. Ashok Sharma'" />
         <FormInput label="Tenant Address" id="tenantAddress" value={states.tenantAddress} onChange={(e) => states.setTenantAddress(e.target.value)} placeholder="e.g., 'A-502, New Horizons, Pune'" />
         <FormInput label="Tenant Phone" id="tenantPhone" value={states.tenantPhone} onChange={(e) => states.setTenantPhone(e.target.value)} placeholder="e.g., '98XXXXXX02'" />
@@ -142,14 +142,14 @@ const RentAgreementForm = ({ states }) => {
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">4. Terms & Payment</legend>
         <FormInput label="Start Date (DD/MM/YYYY)" id="startDate" value={states.startDate} onChange={(e) => states.setStartDate(e.target.value)} placeholder="e.g., '01/12/2025'" />
-        <FormInput label="Duration (in Months)" id="durationMonths" value={states.durationMonths} onChange={(e) => states.setDurationMonths(e.target.value)} type="number" />
-        <FormInput label="Monthly Rent (₹)" id="monthlyRent" value={states.monthlyRent} onChange={(e) => states.setMonthlyRent(e.target.value)} type="number" />
+        <FormInput label="Duration (in Months)" id="durationMonths" value={states.durationMonths} onChange={(e) => states.setDurationMonths(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '11'" type="text" />
+        <FormInput label="Monthly Rent (₹)" id="monthlyRent" value={states.monthlyRent} onChange={(e) => states.setMonthlyRent(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '50000'" type="text" />
         <FormInput label="Monthly Rent (in words)" id="monthlyRentWords" value={states.monthlyRentWords} onChange={(e) => states.setMonthlyRentWords(e.target.value)} placeholder="e.g., 'Fifty Thousand'" />
-        <FormInput label="Rent Due Day (of each month)" id="dueDay" value={states.dueDay} onChange={(e) => states.setDueDay(e.target.value)} type="number" />
+        <FormInput label="Rent Due Day (of each month)" id="dueDay" value={states.dueDay} onChange={(e) => states.setDueDay(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '5'" type="text" />
         <FormInput label="Payment Mode" id="paymentMode" value={states.paymentMode} onChange={(e) => states.setPaymentMode(e.target.value)} placeholder="e.g., 'Bank Transfer / NEFT'" />
         <FormInput label="Payment Address / Details" id="paymentAddress" value={states.paymentAddress} onChange={(e) => states.setPaymentAddress(e.target.value)} placeholder="e.g., 'HDFC Bank, A/C 1234...'" />
-        <FormInput label="Security Deposit (₹)" id="securityAmount" value={states.securityAmount} onChange={(e) => states.setSecurityAmount(e.target.value)} type="number" />
-        <FormInput label="Notice Period (in Months)" id="noticePeriod" value={states.noticePeriod} onChange={(e) => states.setNoticePeriod(e.target.value)} type="number" />
+        <FormInput label="Security Deposit (₹)" id="securityAmount" value={states.securityAmount} onChange={(e) => states.setSecurityAmount(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '200000'" type="text" />
+        <FormInput label="Notice Period (in Months)" id="noticePeriod" value={states.noticePeriod} onChange={(e) => states.setNoticePeriod(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '2'" type="text" />
         <FormInput label="Jurisdiction (City)" id="jurisdictionCity" value={states.jurisdictionCity} onChange={(e) => states.setJurisdictionCity(e.target.value)} placeholder="e.g., 'Mumbai'" />
       </fieldset>
     </div>
@@ -164,7 +164,7 @@ const SaleDeedForm = ({ states }) => {
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">1. Seller (Vendor) Details</legend>
         <FormInput label="Seller Full Name" id="sellerName" value={states.sellerName} onChange={(e) => states.setSellerName(e.target.value)} placeholder="e.g., 'Mr. Arjun Reddy'" />
-        <FormInput label="Seller Age" id="sellerAge" value={states.sellerAge} onChange={(e) => states.setSellerAge(e.target.value)} type="number" />
+        <FormInput label="Seller Age" id="sellerAge" value={states.sellerAge} onChange={(e) => states.setSellerAge(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '50'" type="text" />
         <FormInput label="Seller S/o, D/o, W/o" id="sellerRelation" value={states.sellerRelation} onChange={(e) => states.setSellerRelation(e.target.value)} placeholder="e.g., 'Mr. Krishna Reddy'" />
         <FormInput label="Seller Address" id="sellerAddress" value={states.sellerAddress} onChange={(e) => states.setSellerAddress(e.target.value)} placeholder="e.g., '12, Jubilee Hills, Hyderabad'" />
         <FormInput label="Seller Phone" id="sellerPhone" value={states.sellerPhone} onChange={(e) => states.setSellerPhone(e.target.value)} placeholder="e.g., '98XXXXXX03'" />
@@ -172,7 +172,7 @@ const SaleDeedForm = ({ states }) => {
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">2. Buyer (Vendee) Details</legend>
         <FormInput label="Buyer Full Name" id="buyerName" value={states.buyerName} onChange={(e) => states.setBuyerName(e.target.value)} placeholder="e.g., 'Mrs. Meera Krishnan'" />
-        <FormInput label="Buyer Age" id="buyerAge" value={states.buyerAge} onChange={(e) => states.setBuyerAge(e.target.value)} type="number" />
+        <FormInput label="Buyer Age" id="buyerAge" value={states.buyerAge} onChange={(e) => states.setBuyerAge(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '40'" type="text" />
         <FormInput label="Buyer S/o, D/o, W/o" id="buyerRelation" value={states.buyerRelation} onChange={(e) => states.setBuyerRelation(e.target.value)} placeholder="e.g., 'Mr. Ramesh Krishnan'" />
         <FormInput label="Buyer Address" id="buyerAddress" value={states.buyerAddress} onChange={(e) => states.setBuyerAddress(e.target.value)} placeholder="e.g., '34, Anna Nagar, Chennai'" />
         <FormInput label="Buyer Phone" id="buyerPhone" value={states.buyerPhone} onChange={(e) => states.setBuyerPhone(e.target.value)} placeholder="e.g., '98XXXXXX04'" />
@@ -181,7 +181,7 @@ const SaleDeedForm = ({ states }) => {
         <legend className="text-lg font-semibold text-legal-blue-primary">3. Property & Sale Details</legend>
         <FormInput label="Full Property Address" id="propAddress" value={states.propertyAddress} onChange={(e) => states.setPropertyAddress(e.target.value)} placeholder="e.g., 'Plot 5, Adyar, Chennai'" />
         <FormInput label="Ownership Details" id="ownershipDetails" value={states.ownershipDetails} onChange={(e) => states.setOwnershipDetails(e.target.value)} placeholder="e.g., 'via Sale Deed dated 10/05/2010'" />
-        <FormInput label="Total Sale Amount (₹)" id="saleAmount" value={states.saleAmount} onChange={(e) => states.setSaleAmount(e.target.value)} type="number" />
+        <FormInput label="Total Sale Amount (₹)" id="saleAmount" value={states.saleAmount} onChange={(e) => states.setSaleAmount(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '10000000'" type="text" />
         <FormInput label="Sale Amount (in words)" id="saleAmountWords" value={states.saleAmountWords} onChange={(e) => states.setSaleAmountWords(e.target.value)} placeholder="e.g., 'One Crore Fifty Lakhs'" />
         <FormInput label="Jurisdiction (City)" id="jurisdictionCity" value={states.jurisdictionCity} onChange={(e) => states.setJurisdictionCity(e.target.value)} placeholder="e.g., 'Chennai'" />
       </fieldset>
@@ -190,7 +190,7 @@ const SaleDeedForm = ({ states }) => {
         <FormInput label="Payment Mode" id="payMode" value={states.paymentMode} onChange={(e) => states.setPaymentMode(e.target.value)} placeholder="e.g., 'Bank Cheque / Cash'" />
         <FormInput label="Reference No. (if any)" id="payRef" value={states.paymentReference} onChange={(e) => states.setPaymentReference(e.target.value)} placeholder="e.g., 'Cheque No. 123456'" required={false} />
         <FormInput label="Payment Date" id="payDate" value={states.paymentDate} onChange={(e) => states.setPaymentDate(e.target.value)} placeholder="e.g., '11/11/2025'" />
-        <FormInput label="Payment Amount (₹)" id="payAmount" value={states.paymentAmount} onChange={(e) => states.setPaymentAmount(e.target.value)} type="number" />
+        <FormInput label="Payment Amount (₹)" id="payAmount" value={states.paymentAmount} onChange={(e) => states.setPaymentAmount(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '10000000'" type="text" />
       </fieldset>
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">5. Property Schedule (Boundaries & Area)</legend>
@@ -216,7 +216,7 @@ const LeaseDeedForm = ({ states }) => {
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">1. Lessor (Owner) Details</legend>
         <FormInput label="Lessor Full Name" id="lessorName" value={states.lessorName} onChange={(e) => states.setLessorName(e.target.value)} placeholder="e.g., 'Mr. Prakash Rao'" />
-        <FormInput label="Lessor Age" id="lessorAge" value={states.lessorAge} onChange={(e) => states.setLessorAge(e.target.value)} type="number" />
+        <FormInput label="Lessor Age" id="lessorAge" value={states.lessorAge} onChange={(e) => states.setLessorAge(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '60'" type="text" />
         <FormInput label="Lessor S/o, D/o, W/o" id="lessorRelation" value={states.lessorRelation} onChange={(e) => states.setLessorRelation(e.target.value)} placeholder="e.g., 'Mr. Mohan Rao'" />
         <FormInput label="Lessor Address" id="lessorAddress" value={states.lessorAddress} onChange={(e) => states.setLessorAddress(e.target.value)} placeholder="e.g., '123, Indiranagar, Bangalore'" />
         <FormInput label="Lessor Phone" id="lessorPhone" value={states.lessorPhone} onChange={(e) => states.setLessorPhone(e.target.value)} placeholder="e.g., '98XXXXXX05'" />
@@ -225,7 +225,7 @@ const LeaseDeedForm = ({ states }) => {
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">2. Lessee (Tenant) Details</legend>
         <FormInput label="Lessee Full Name" id="lesseeName" value={states.lesseeName} onChange={(e) => states.setLesseeName(e.target.value)} placeholder="e.g., 'Mr. Vikram Singh'" />
-        <FormInput label="Lessee Age" id="lesseeAge" value={states.lesseeAge} onChange={(e) => states.setLesseeAge(e.target.value)} type="number" />
+        <FormInput label="Lessee Age" id="lesseeAge" value={states.lesseeAge} onChange={(e) => states.setLesseeAge(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '35'" type="text" />
         <FormInput label="Lessee S/o, D/o, W/o" id="lesseeRelation" value={states.lesseeRelation} onChange={(e) => states.setLesseeRelation(e.target.value)} placeholder="e.g., 'Mr. Anand Singh'" />
         <FormInput label="Lessee Address" id="lesseeAddress" value={states.lesseeAddress} onChange={(e) => states.setLesseeAddress(e.target.value)} placeholder="e.g., '456, Koramangala, Bangalore'" />
         <FormInput label="Lessee Phone" id="lesseePhone" value={states.lesseePhone} onChange={(e) => states.setLesseePhone(e.target.value)} placeholder="e.g., '98XXXXXX06'" />
@@ -244,11 +244,11 @@ const LeaseDeedForm = ({ states }) => {
       <fieldset className="space-y-4 border-b pb-6">
         <legend className="text-lg font-semibold text-legal-blue-primary">4. Lease Terms & Payment</legend>
         <FormInput label="Lease Start Date" id="leaseStartDate" value={states.leaseStartDate} onChange={(e) => states.setLeaseStartDate(e.target.value)} placeholder="e.g., '01/01/2026'" />
-        <FormInput label="Lease Duration (in Years)" id="leaseDuration" value={states.leaseDurationYears} onChange={(e) => states.setLeaseDurationYears(e.target.value)} type="number" />
+        <FormInput label="Lease Duration (in Years)" id="leaseDuration" value={states.leaseDurationYears} onChange={(e) => states.setLeaseDurationYears(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '3'" type="text" />
         <FormInput label="Lease End Date" id="leaseEndDate" value={states.leaseEndDate} onChange={(e) => states.setLeaseEndDate(e.target.value)} placeholder="e.g., '31/12/2028'" />
-        <FormInput label="Lease Rent Amount (₹ per month)" id="leaseRent" value={states.leaseRentAmount} onChange={(e) => states.setLeaseRentAmount(e.target.value)} type="number" />
+        <FormInput label="Lease Rent Amount (₹ per month)" id="leaseRent" value={states.leaseRentAmount} onChange={(e) => states.setLeaseRentAmount(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '100000'" type="text" />
         <FormInput label="Rent (in words)" id="leaseRentWords" value={states.leaseRentWords} onChange={(e) => states.setLeaseRentWords(e.target.value)} placeholder="e.g., 'One Lakh'" />
-        <FormInput label="Rent Due Day (of each month)" id="leaseRentDueDay" value={states.rentDueDay} onChange={(e) => states.setRentDueDay(e.target.value)} type="number" />
+        <FormInput label="Rent Due Day (of each month)" id="leaseRentDueDay" value={states.rentDueDay} onChange={(e) => states.setRentDueDay(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '5'" type="text" />
         <FormInput label="Payment Mode" id="leasePayMode" value={states.paymentMode} onChange={(e) => states.setPaymentMode(e.target.value)} placeholder="e.g., 'Bank Transfer'" />
         
         {/* --- ADDING THE NEW OPTIONAL FIELD --- */}
@@ -261,9 +261,9 @@ const LeaseDeedForm = ({ states }) => {
           required={false} 
         />
         
-        <FormInput label="Security Deposit (₹)" id="leaseSecurity" value={states.securityDepositAmount} onChange={(e) => states.setSecurityDepositAmount(e.target.value)} type="number" />
-        <FormInput label="Termination Notice Period (in Months)" id="leaseNotice" value={states.terminationNoticePeriod} onChange={(e) => states.setTerminationNoticePeriod(e.target.value)} type="number" />
-        <FormInput label="Rent Default Period (in Months)" id="leaseDefault" value={states.defaultMonths} onChange={(e) => states.setDefaultMonths(e.target.value)} type="number" />
+        <FormInput label="Security Deposit (₹)" id="leaseSecurity" value={states.securityDepositAmount} onChange={(e) => states.setSecurityDepositAmount(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '600000'" type="text" />
+        <FormInput label="Termination Notice Period (in Months)" id="leaseNotice" value={states.terminationNoticePeriod} onChange={(e) => states.setTerminationNoticePeriod(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '3'" type="text" />
+        <FormInput label="Rent Default Period (in Months)" id="leaseDefault" value={states.defaultMonths} onChange={(e) => states.setDefaultMonths(e.target.value.replace(/\D/g, ''))} placeholder="e.g., '2'" type="text" />
         <FormInput label="Registration & Stamp Duty Borne By" id="regBorneBy" value={states.registrationBorneBy} onChange={(e) => states.setRegistrationBorneBy(e.target.value)} placeholder="e.g., 'Lessee' or 'Both Parties Equally'" />
         <FormInput label="Jurisdiction (City)" id="leaseJurisdiction" value={states.jurisdictionCity} onChange={(e) => states.setJurisdictionCity(e.target.value)} placeholder="e.g., 'Bangalore'" />
       </fieldset>
@@ -286,7 +286,7 @@ function DocumentGeneratorPage() {
   // --- NDA Form State ---
   const [nda_purpose, setNdaPurpose] = useState('');
   const [nda_businessPurpose, setNdaBusinessPurpose] = useState('');
-  const [nda_duration, setNdaDuration] = useState('5');
+  const [nda_duration, setNdaDuration] = useState('');
   const [nda_jurisdiction, setNdaJurisdiction] = useState('');
   const [nda_disclosingPartyName, setNdaDisclosingPartyName] = useState('');
   const [nda_disclosingPartyAddress, setNdaDisclosingPartyAddress] = useState('');
@@ -294,7 +294,7 @@ function DocumentGeneratorPage() {
 
   // --- Affidavit Form State ---
   const [aff_deponentName, setAffDeponentName] = useState('');
-  const [aff_deponentAge, setAffDeponentAge] = useState('30');
+  const [aff_deponentAge, setAffDeponentAge] = useState('');
   const [aff_relationName, setAffRelationName] = useState('');
   const [aff_deponentAddress, setAffDeponentAddress] = useState('');
   const [aff_purpose, setAffPurpose] = useState('');
@@ -307,49 +307,49 @@ function DocumentGeneratorPage() {
   // --- Rent Agreement Form State ---
   const [rent_agreementCity, setRentAgreementCity] = useState('');
   const [rent_landlordName, setRentLandlordName] = useState('');
-  const [rent_landlordAge, setRentLandlordAge] = useState('55');
+  const [rent_landlordAge, setRentLandlordAge] = useState('');
   const [rent_landlordRelation, setRentLandlordRelation] = useState('');
   const [rent_landlordAddress, setRentLandlordAddress] = useState('');
   const [rent_landlordPhone, setRentLandlordPhone] = useState('');
   const [rent_tenantName, setRentTenantName] = useState('');
-  const [rent_tenantAge, setRentTenantAge] = useState('28');
+  const [rent_tenantAge, setRentTenantAge] = useState('');
   const [rent_tenantRelation, setRentTenantRelation] = useState('');
   const [rent_tenantAddress, setRentTenantAddress] = useState('');
   const [rent_tenantPhone, setRentTenantPhone] = useState('');
   const [rent_propertyAddress, setRentPropertyAddress] = useState('');
   const [rent_propertyDescription, setRentPropertyDescription] = useState('');
   const [rent_startDate, setRentStartDate] = useState('');
-  const [rent_durationMonths, setRentDurationMonths] = useState('11');
-  const [rent_monthlyRent, setRentMonthlyRent] = useState('50000');
+  const [rent_durationMonths, setRentDurationMonths] = useState('');
+  const [rent_monthlyRent, setRentMonthlyRent] = useState('');
   const [rent_monthlyRentWords, setRentMonthlyRentWords] = useState('');
-  const [rent_dueDay, setRentDueDay] = useState('5');
+  const [rent_dueDay, setRentDueDay] = useState('');
   const [rent_paymentMode, setRentPaymentMode] = useState('');
   const [rent_paymentAddress, setRentPaymentAddress] = useState('');
-  const [rent_securityAmount, setRentSecurityAmount] = useState('200000');
-  const [rent_usageType, setRentUsageType] = useState('Residential');
-  const [rent_noticePeriod, setRentNoticePeriod] = useState('2');
+  const [rent_securityAmount, setRentSecurityAmount] = useState('');
+  const [rent_usageType, setRentUsageType] = useState('');
+  const [rent_noticePeriod, setRentNoticePeriod] = useState('');
   const [rent_jurisdictionCity, setRentJurisdictionCity] = useState('');
   
   // --- Sale Deed Form State ---
   const [sale_executionCity, setSaleExecutionCity] = useState('');
   const [sale_sellerName, setSaleSellerName] = useState('');
-  const [sale_sellerAge, setSaleSellerAge] = useState('50');
+  const [sale_sellerAge, setSaleSellerAge] = useState('');
   const [sale_sellerRelation, setSaleSellerRelation] = useState('');
   const [sale_sellerAddress, setSaleSellerAddress] = useState('');
   const [sale_sellerPhone, setSaleSellerPhone] = useState('');
   const [sale_buyerName, setSaleBuyerName] = useState('');
-  const [sale_buyerAge, setSaleBuyerAge] = useState('40');
+  const [sale_buyerAge, setSaleBuyerAge] = useState('');
   const [sale_buyerRelation, setSaleBuyerRelation] = useState('');
   const [sale_buyerAddress, setSaleBuyerAddress] = useState('');
   const [sale_buyerPhone, setSaleBuyerPhone] = useState('');
   const [sale_propertyAddress, setSalePropertyAddress] = useState('');
   const [sale_ownershipDetails, setSaleOwnershipDetails] = useState('');
-  const [sale_saleAmount, setSaleSaleAmount] = useState('10000000');
+  const [sale_saleAmount, setSaleSaleAmount] = useState('');
   const [sale_saleAmountWords, setSaleSaleAmountWords] = useState('');
   const [sale_paymentMode, setSalePaymentMode] = useState('');
   const [sale_paymentReference, setSalePaymentReference] = useState('');
   const [sale_paymentDate, setSalePaymentDate] = useState('');
-  const [sale_paymentAmount, setSalePaymentAmount] = useState('10000000');
+  const [sale_paymentAmount, setSalePaymentAmount] = useState('');
   const [sale_propertyType, setSalePropertyType] = useState('');
   const [sale_boundaryEast, setSaleBoundaryEast] = useState('');
   const [sale_boundaryWest, setSaleBoundaryWest] = useState('');
@@ -363,29 +363,29 @@ function DocumentGeneratorPage() {
   // --- LEASE DEED Form State ---
   const [lease_executionCity, setLeaseExecutionCity] = useState('');
   const [lease_lessorName, setLeaseLessorName] = useState('');
-  const [lease_lessorAge, setLeaseLessorAge] = useState('60');
+  const [lease_lessorAge, setLeaseLessorAge] = useState('');
   const [lease_lessorRelation, setLeaseLessorRelation] = useState('');
   const [lease_lessorAddress, setLeaseLessorAddress] = useState('');
   const [lease_lessorPhone, setLeaseLessorPhone] = useState('');
   const [lease_lesseeName, setLeaseLesseeName] = useState('');
-  const [lease_lesseeAge, setLeaseLesseeAge] = useState('35');
+  const [lease_lesseeAge, setLeaseLesseeAge] = useState('');
   const [lease_lesseeRelation, setLeaseLesseeRelation] = useState('');
   const [lease_lesseeAddress, setLeaseLesseeAddress] = useState('');
   const [lease_lesseePhone, setLeaseLesseePhone] = useState('');
   const [lease_propertyAddress, setLeasePropertyAddress] = useState('');
   const [lease_propertyDescription, setLeasePropertyDescription] = useState('');
-  const [lease_leasePurpose, setLeaseLeasePurpose] = useState('Commercial');
+  const [lease_leasePurpose, setLeaseLeasePurpose] = useState('');
   const [lease_leaseStartDate, setLeaseLeaseStartDate] = useState('');
-  const [lease_leaseDurationYears, setLeaseLeaseDurationYears] = useState('3');
+  const [lease_leaseDurationYears, setLeaseLeaseDurationYears] = useState('');
   const [lease_leaseEndDate, setLeaseLeaseEndDate] = useState('');
-  const [lease_leaseRentAmount, setLeaseLeaseRentAmount] = useState('100000');
+  const [lease_leaseRentAmount, setLeaseLeaseRentAmount] = useState('');
   const [lease_leaseRentWords, setLeaseLeaseRentWords] = useState('');
-  const [lease_rentDueDay, setLeaseRentDueDay] = useState('5');
-  const [lease_paymentMode, setLeasePaymentMode] = useState('Bank Transfer');
+  const [lease_rentDueDay, setLeaseRentDueDay] = useState('');
+  const [lease_paymentMode, setLeasePaymentMode] = useState('');
   const [lease_paymentReference, setLeasePaymentReference] = useState(''); // <-- ADDED STATE
-  const [lease_securityDepositAmount, setLeaseSecurityDepositAmount] = useState('600000');
-  const [lease_terminationNoticePeriod, setLeaseTerminationNoticePeriod] = useState('3');
-  const [lease_defaultMonths, setLeaseDefaultMonths] = useState('2');
+  const [lease_securityDepositAmount, setLeaseSecurityDepositAmount] = useState('');
+  const [lease_terminationNoticePeriod, setLeaseTerminationNoticePeriod] = useState('');
+  const [lease_defaultMonths, setLeaseDefaultMonths] = useState('');
   const [lease_registrationBorneBy, setLeaseRegistrationBorneBy] = useState('');
   const [lease_jurisdictionCity, setLeaseJurisdictionCity] = useState('');
 

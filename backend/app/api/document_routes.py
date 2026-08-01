@@ -2,11 +2,12 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from typing import List, Literal, Union
 from docxtpl import DocxTemplate
-import docx2pdf
 import os
 import re
 from datetime import date
 import time
+import pythoncom
+import win32com.client
 
 # Import our API keys from the config file
 from app.core.config import DOCUMENT_GENERATOR_API_KEY, RENT_SALE_API_KEY, LEASE_DEED_API_KEY
@@ -258,29 +259,154 @@ def handle_lease_deed_generation(request: LeaseDeedRequest):
         print(f"An error occurred: {e}")
         raise HTTPException(status_code=500, detail=f"Error generating Lease Deed: {str(e)}")
 
+def convert_docx_to_pdf(docx_path: str, pdf_path: str):
+    """
+    Convert DOCX to PDF using Microsoft Word COM.
+    More reliable than docx2pdf inside FastAPI.
+    """
+
+    word = None
+    document = None
+
+    pythoncom.CoInitialize()
+
+    try:
+        docx_path = os.path.abspath(docx_path)
+        pdf_path = os.path.abspath(pdf_path)
+
+        if not os.path.exists(docx_path):
+            raise FileNotFoundError(f"DOCX not found: {docx_path}")
+
+        word = win32com.client.DispatchEx("Word.Application")
+
+        word.Visible = False
+        word.DisplayAlerts = 0
+
+        document = word.Documents.Open(
+            docx_path,
+            ReadOnly=True
+        )
+
+        # Export directly as PDF
+        document.ExportAsFixedFormat(
+            OutputFileName=pdf_path,
+            ExportFormat=17  # wdExportFormatPDF
+        )
+
+        if not os.path.exists(pdf_path):
+            raise RuntimeError("PDF was not created.")
+
+    finally:
+
+        if document is not None:
+            try:
+                document.Close(False)
+            except:
+                pass
+
+        if word is not None:
+            try:
+                word.Quit()
+            except:
+                pass
+
+        pythoncom.CoUninitialize()
+
 
 # --- Helper function for file generation ---
 def generate_and_save_files(doc: DocxTemplate, context: dict, base_filename: str):
     """
-    Renders, saves, and converts a doc template.
-    Returns a dictionary of download links.
+    Render DOCX template and convert it to PDF.
     """
+
     output_docx_name = f"{base_filename}.docx"
     output_pdf_name = f"{base_filename}.pdf"
-    output_docx_path = os.path.join(OUTPUT_DIR, output_docx_name)
-    output_pdf_path = os.path.join(OUTPUT_DIR, output_pdf_name)
 
-    doc.render(context)
-    doc.save(output_docx_path)
-    
-    pdf_url = None
+    output_docx_path = os.path.abspath(
+        os.path.join(
+            OUTPUT_DIR,
+            output_docx_name
+        )
+    )
+
+    output_pdf_path = os.path.abspath(
+        os.path.join(
+            OUTPUT_DIR,
+            output_pdf_name
+        )
+    )
+
     try:
-        docx2pdf.convert(output_docx_path, output_pdf_path)
-        pdf_url = f"/static/outputs/{output_pdf_name}"
-    except Exception as pdf_error:
-        print(f"Warning: PDF conversion failed: {pdf_error}")
 
-    return {
-        "docx_url": f"/static/outputs/{output_docx_name}",
-        "pdf_url": pdf_url
-    }
+        # -------------------------------
+        # Render Template
+        # -------------------------------
+
+        doc.render(context)
+
+        # -------------------------------
+        # Save DOCX
+        # -------------------------------
+
+        doc.save(output_docx_path)
+
+        if not os.path.exists(output_docx_path):
+            raise RuntimeError(
+                "DOCX generation failed."
+            )
+
+        print(f"DOCX generated: {output_docx_path}")
+
+        # -------------------------------
+        # Convert PDF
+        # -------------------------------
+
+        convert_docx_to_pdf(
+            output_docx_path,
+            output_pdf_path
+        )
+
+        if os.path.exists(output_pdf_path):
+
+            print(f"PDF generated: {output_pdf_path}")
+
+            pdf_url = (
+                f"/static/outputs/{output_pdf_name}"
+            )
+
+        else:
+
+            pdf_url = None
+
+        return {
+
+            "success": True,
+
+            "docx_url":
+                f"/static/outputs/{output_docx_name}",
+
+            "pdf_url":
+                pdf_url
+        }
+
+    except Exception as e:
+
+        print("=" * 60)
+        print("DOCUMENT GENERATION ERROR")
+        print(type(e).__name__)
+        print(str(e))
+        print("=" * 60)
+
+        return {
+
+            "success": False,
+
+            "error": str(e),
+
+            "docx_url":
+                f"/static/outputs/{output_docx_name}"
+                if os.path.exists(output_docx_path)
+                else None,
+
+            "pdf_url": None
+        }

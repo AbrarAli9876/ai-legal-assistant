@@ -44,9 +44,9 @@ const UnpaidSalaryForm = ({ states }) => {
         <FormInput label="Employment Start Date" id="startDate" value={states.employment_start_date} onChange={(e) => states.setEmploymentStartDate(e.target.value)} placeholder="e.g., '01/06/2023'" />
         <FormInput label="Employment End Date" id="endDate" value={states.employment_end_date} onChange={(e) => states.setEmploymentEndDate(e.target.value)} placeholder="e.g., '15/10/2025'" />
         <FormInput label="Unpaid Salary Period" id="unpaidPeriod" value={states.unpaid_salary_period} onChange={(e) => states.setUnpaidSalaryPeriod(e.target.value)} placeholder="e.g., 'September & October 2025'" />
-        <FormInput label="Unpaid Salary Amount (₹)" id="unpaidAmount" value={states.unpaid_salary_amount} onChange={(e) => states.setUnpaidSalaryAmount(e.target.value)} type="number" placeholder="e.g., '100000'" />
+        <FormInput label="Unpaid Salary Amount (₹)" id="unpaidAmount" value={states.unpaid_salary_amount} onChange={(e) => states.setUnpaidSalaryAmount(e.target.value.replace(/\D/g, ''))} type="text" placeholder="e.g., '100000'" />
         <FormInput label="Unpaid Salary (in words)" id="unpaidWords" value={states.unpaid_salary_amount_words} onChange={(e) => states.setUnpaidSalaryAmountWords(e.target.value)} placeholder="e.g., 'One Lakh'" />
-        <FormInput label="Response Time (in days)" id="responseDays" value={states.response_time_days} onChange={(e) => states.setResponseTimeDays(e.target.value)} type="number" placeholder="e.g., '15'" />
+        <FormInput label="Response Time (in days)" id="responseDays" value={states.response_time_days} onChange={(e) => states.setResponseTimeDays(e.target.value.replace(/\D/g, ''))} type="text" placeholder="e.g., '15'" />
       </fieldset>
     </div>
   );
@@ -78,9 +78,9 @@ const LoanRepaymentForm = ({ states }) => {
         <FormInput label="Purpose of Loan" id="loanPurpose" value={states.loan_purpose} onChange={(e) => states.setLoanPurpose(e.target.value)} placeholder="e.g., 'a personal medical emergency'" />
         <FormInput label="Installment Amount (₹)" id="installmentAmount" value={states.installment_amount} onChange={(e) => states.setInstallmentAmount(e.target.value)} type="number" placeholder="e.g., '9000'" />
         <FormInput label="Outstanding Amount As Of (Date)" id="outstandingDate" value={states.outstanding_date} onChange={(e) => states.setOutstandingDate(e.target.value)} placeholder="e.g., '12/11/2025'" />
-        <FormInput label="Total Outstanding Amount (₹)" id="outstandingAmount" value={states.outstanding_amount} onChange={(e) => states.setOutstandingAmount(e.target.value)} type="number" placeholder="e.g., '32000'" />
+        <FormInput label="Total Outstanding Amount (₹)" id="outstandingAmount" value={states.outstanding_amount} onChange={(e) => states.setOutstandingAmount(e.target.value.replace(/\D/g, ''))} type="text" placeholder="e.g., '32000'" />
         <FormInput label="Outstanding Amount (in words)" id="outstandingAmountWords" value={states.outstanding_amount_words} onChange={(e) => states.setOutstandingAmountWords(e.target.value)} placeholder="e.g., 'Thirty-Two Thousand'" />
-        <FormInput label="Response Time (in days)" id="responseDays" value={states.response_time_days} onChange={(e) => states.setResponseTimeDays(e.target.value)} type="number" placeholder="e.g., '15'" />
+        <FormInput label="Response Time (in days)" id="responseDays" value={states.response_time_days} onChange={(e) => states.setResponseTimeDays(e.target.value.replace(/\D/g, ''))} type="text" placeholder="e.g., '15'" />    
       </fieldset>
     </div>
   );
@@ -112,7 +112,7 @@ function NoticeGeneratorPage() {
   const [unpaid_salary_period, setUnpaidSalaryPeriod] = useState('');
   const [unpaid_salary_amount, setUnpaidSalaryAmount] = useState('');
   const [unpaid_salary_amount_words, setUnpaidSalaryAmountWords] = useState('');
-  const [response_time_days, setResponseTimeDays] = useState('15');
+  const [response_time_days, setResponseTimeDays] = useState('');
 
   // --- NEW Form State for Loan Repayment ---
   const [borrower_name, setBorrowerName] = useState('');
@@ -129,7 +129,7 @@ function NoticeGeneratorPage() {
   const [outstanding_date, setOutstandingDate] = useState('');
   const [outstanding_amount, setOutstandingAmount] = useState('');
   const [outstanding_amount_words, setOutstandingAmountWords] = useState('');
-  const [loan_response_time_days, setLoanResponseTimeDays] = useState('15');
+  const [loan_response_time_days, setLoanResponseTimeDays] = useState('');
 
 
   // --- Form Submit Function ---
